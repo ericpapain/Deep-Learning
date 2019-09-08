@@ -172,7 +172,7 @@ regressor.compile(optimizer="adam", loss="mean_squared_error")
 
 
 # entrainement du réseau
-regressor.fit(x_train, y_train, epochs=10, batch_size=32)
+regressor.fit(x_train, y_train, epochs=20, batch_size=32)
 
 
 ##########################################
@@ -236,7 +236,7 @@ predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 plt.plot(real_stock_price, color="red", 
          label="prix réel de l'action Google")
 
-plt.plot(real_stock_price, color="green", 
+plt.plot(predicted_stock_price, color="green", 
          label="prix prédit de l'action Google")
 
 plt.title("Prédictions de l'action Google")
