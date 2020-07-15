@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon jan  6 04:51:02 2020
+
+@author: eric
+"""
+
 from __future__ import absolute_import, division, print_function, unicode_literals
 import tensorflow as tf
 from tensorflow.keras import layers
