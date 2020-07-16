@@ -2,7 +2,7 @@
 
 ## moteur de recherche d'image dans la base de donnée de Wang
 
-    > Enoncé : 
+    > Enoncé 
 La recherche d’images par le contenu est un domaine de recherche très actif depuis plusieurs
 années maintenant. Avec l’explosion de l’imagerie numérique, nous nous retrouvons souvent
 avec d’énormes bases d’images et la recherche d’une image particulière est un problème difficile à résoudre.
@@ -172,8 +172,5 @@ Nous implementons ici les réseaux de neurones antagonistes générative qui son
 - Tensorflow
 - Keras
 - Theano
-- OpenCV
-- Haar
-- DQ-NN
 - sklearn
 
