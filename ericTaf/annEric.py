@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov  6 01:23:09 2019
+
+@author: eric
+"""
+
 # Artificial Neural Network
 
 # Installing Theano 
@@ -19,7 +27,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # chargement des données
-dataset = pd.read_csv("/home/eric/Documents/analyseDonnee/udemyInoussaMerci/deeplearnig/deeplearning-master/Part 1 - Artificial_Neural_Networks/ericTaf/dataset/Churn_Modelling.csv")
+dataset = pd.read_csv("/home/eric/Documents/analyseDonnee/deeplearnig/deeplearning-master/Artificial_Neural_Networks/ericTaf/dataset/Churn_Modelling.csv")
 
 X = dataset.iloc[:, 3:13].values
 Y = dataset.iloc[:,-1].values
