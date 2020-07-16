@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+# -- coding: utf-8 --
+"""
+Created on Tue Jan 28 13:41:19 2020
+
+@author: eric_papain
+"""
+
+import cv2
+import numpy as np
+import os
+import pickle 
+from sklearn.neighbors import NearestNeighbors
+from comon import features, build_histogram,dico_voisin_each_image,analyse_result,precision_moyenne
+import glob
+
+
+#construction histogramme générale
+preprocessed_image = []
+
+data_path = os.path.join('image','*g')
+files_img = glob.glob(data_path)
+
+extractor = cv2.xfeatures2d.SIFT_create(200)
+
+print(data_path)
+
+
+def recherche(path_imgg,nb_near_img_search):
+    #image de test
+    data_path_test = os.path.normpath(path_imgg)
+    #lecture de l'image
+    img_test = cv2.imread(data_path_test)
+    #passage de l'image en niveau de gris
+    img_test = cv2.cvtColor(img_test, cv2.COLOR_BGR2GRAY)
+    #utilisation des descripteur SIFT
+    keypoint, descriptor = features(img_test, extractor)
+    
+    #histogramme de l'image correspondante
+    kmeans = pickle.load(open('serial/new_kmean','rb'))
+    histogram = build_histogram(descriptor, kmeans,150)
+    
+    #recherche des k plus proche voisin
+    neighbor = NearestNeighbors(n_neighbors = int(nb_near_img_search))
+   
+    preprocessed_image = pickle.load(open('serial/new_histo','rb'))
+    
+    #entrainement pour le knn
+    neighbor.fit(preprocessed_image)
+    
+    X_train = [histogram]
+    dist, result = neighbor.kneighbors(X_train)
+    
+    result = np.reshape(result,(-1,1))
+    return result
+
+
+kmeans = pickle.load(open('serial/new_kmean','rb'))
+preprocessed_image = pickle.load(open('serial/new_histo','rb'))
+
+
+dic_neigbor = dico_voisin_each_image(files_img,preprocessed_image,kmeans)   
+
+#sauvegarde dans pickle
+pickle.dump(dic_neigbor,open('serial/new_dic_neigbor','wb'))
+
+dic_precision_concept, dico_moyenne,dic_faux_positif=analyse_result(dic_neigbor)
+
+afr,pla,monu,bus,dino,ele,fle,che,mont,nourr=precision_moyenne(dico_moyenne)  
+
+dico_precision_moyenne_generale={}   
+#enregistrement des precision moyenne par concep
+dico_precision_moyenne_generale['Afrique']=afr
+dico_precision_moyenne_generale['plage']=pla
+dico_precision_moyenne_generale['monument']=monu
+dico_precision_moyenne_generale['bus']=bus
+dico_precision_moyenne_generale['dinosaure']=dino
+dico_precision_moyenne_generale['éléphant']=ele
+dico_precision_moyenne_generale['fleur']=fle
+dico_precision_moyenne_generale['cheval']=che
+dico_precision_moyenne_generale['montagne']=mont
+dico_precision_moyenne_generale['nourriture']=nourr
