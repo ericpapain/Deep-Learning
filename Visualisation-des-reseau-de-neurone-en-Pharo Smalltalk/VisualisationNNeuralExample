@@ -1,0 +1,4 @@
+Object subclass: #VisualisationNNeuralExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'NeuralNetwork-Examples'

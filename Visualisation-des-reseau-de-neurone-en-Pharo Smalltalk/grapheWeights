@@ -1,0 +1,32 @@
+grapheWeights
+	|g d|
+
+
+g := RTGrapher new.
+
+
+		d := RTData new.
+		d label: 'Weights 1'.
+		d connectColor: Color blue.
+		d noDot.
+		d points: weighTestPoints1W1.
+		d x: #first.
+		d y: #second.
+g add: d.
+
+		d := RTData new.
+		d label: 'Weights 2'.
+		d connectColor: Color green .
+		d noDot .
+		d points: weighTestPoints1W2.
+		d x: #first.
+		d y: #second.
+g add: d.
+
+		
+g axisY title: 'weights'.
+g axisX noDecimal; title: 'Epoch'.
+g legend addText: 'weights vs Epoch'.
+
+^g
+

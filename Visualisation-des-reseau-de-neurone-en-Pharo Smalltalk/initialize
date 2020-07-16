@@ -1,0 +1,27 @@
+initialize
+    super initialize.
+    layers := OrderedCollection new.
+    errors := OrderedCollection new.
+	 precisions := OrderedCollection new.
+	
+"mise en place de mes collection pour la manipulation des affichage"
+			weighTestPointsWBias1 := OrderedCollection new.
+			weighTestPoints1W1 := OrderedCollection new.
+		   weighTestPoints1W2 := OrderedCollection new.
+			trainPos :=0.
+			
+"mise en place d'une structure pour representer les valeurs d'entrainement"
+			outputTrainData1 := OrderedCollection new.
+			outputTrainData2 := OrderedCollection new.
+			outputTrainData3 := OrderedCollection new.
+			outputTrainData4 := OrderedCollection new.
+	
+			waitingOuput1 := OrderedCollection new.
+			waitingOuput2 := OrderedCollection new.
+			waitingOuput3 := OrderedCollection new.
+			waitingOuput4 := OrderedCollection new.
+			
+			testPoints1 := OrderedCollection new.
+			testPoints2 := OrderedCollection new.   
+			testPoints3 := OrderedCollection new.
+			testPoints4 := OrderedCollection new.

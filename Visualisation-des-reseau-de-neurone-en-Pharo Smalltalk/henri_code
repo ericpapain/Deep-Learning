@@ -1,0 +1,367 @@
+***********************
+afficherVoisinPosition: arg1
+	^ self tabVoisin at: arg1
+
+***********************
+ajoutLienVoisin: arg1 relation: arg2 degree: arg3
+	| tmp1 tmp2 tmp3 tmp4 |
+	tmp1 := arg1 nom.
+	tmp2 := self nom.
+	tmp3 := OrderedCollection new.
+	tmp4 := OrderedCollection new.
+	tmp3
+		add: tmp1;
+		add: arg2;
+		add: arg3.
+	tmp4
+		add: tmp2;
+		add: arg2;
+		add: arg3.
+	(self tabVoisin add: tmp3) asSet.
+	(arg1 tabVoisin add: tmp4) asSet
+***********************
+calculDeMetriqueCompletNessControle
+	| tmp1 tmp2 tmp3 tmp4 tmp5 |
+	tmp2 := self sommeDegreControle .
+	tmp3 := self nombreDeRelationAvecSesVoisinControle .
+	tmp4 := self maxControle .
+	tmp5 := tmp3 * (tmp3 - 1) * tmp4.
+	tmp1 := tmp2 / tmp5.
+	^ tmp1
+
+*************************
+calculDeMetriqueCompletNessCoordination
+	| tmp1 tmp2 tmp3 tmp4 tmp5 |
+	tmp2 := self sommeDegreCoordination.
+	tmp3 := self nombreDeRelationAvecSesVoisinCoordination.
+	tmp4 := self maxCoordination.
+	tmp5 := tmp3 * (tmp3 - 1) * tmp4.
+	tmp1 := tmp2 / tmp5.
+	^ tmp1
+***************************************
+calculDeMetriqueCompletNessPouvoir
+	| tmp1 tmp2 tmp3 tmp4 tmp5 |
+	tmp2 := self sommeDegrePouvoir.
+	tmp3 := self nombreDeRelationAvecSesVoisinPouvoir.
+	tmp4 := self maxPouvoir.
+	tmp5 := tmp3 * (tmp3 - 1) * tmp4.
+	tmp1 := tmp2 / tmp5.
+	^ tmp1
+***************************************
+initialize
+	super initialize.
+	tabVoisin := OrderedCollection new
+*************************************
+maxControle
+	| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+	tmp1 := 0.
+	tmp4 := SortedCollection new.
+	tmp2 := self tabVoisin size.
+	tmp6 := tmp2.
+	1 to: tmp6 do: [ :tmp7 | 
+		tmp3 := (self tabVoisin at: tmp7) at: 2.
+		tmp5 := (self tabVoisin at: tmp7) at: 3.
+		tmp3 = 'controle'
+			ifTrue: [ tmp4 add: tmp5 ] ].
+	^ tmp4 last
+***************************************
+maxCoordination
+	| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+	tmp1 := 0.
+	tmp4 := SortedCollection new.
+	tmp2 := self tabVoisin size.
+	tmp6 := tmp2.
+	1 to: tmp6 do: [ :tmp7 | 
+		tmp3 := (self tabVoisin at: tmp7) at: 2.
+		tmp5 := (self tabVoisin at: tmp7) at: 3.
+		tmp3 = 'coordination'
+			ifTrue: [ tmp4 add: tmp5 ] ].
+	^ tmp4 last
+**************************
+maxPouvoir
+	| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+	tmp1 := 0.
+	tmp4 := SortedCollection new.
+	tmp2 := self tabVoisin size.
+	tmp6 := tmp2.
+	1 to: tmp6 do: [ :tmp7 | 
+		tmp3 := (self tabVoisin at: tmp7) at: 2.
+		tmp5 := (self tabVoisin at: tmp7) at: 3.
+		tmp3 = 'pouvoir'
+			ifTrue: [ tmp4 add: tmp5 ] ].
+	^ tmp4 last
+************************
+maxPouvoir
+	| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+	tmp1 := 0.
+	tmp4 := SortedCollection new.
+	tmp2 := self tabVoisin size.
+	tmp6 := tmp2.
+	1 to: tmp6 do: [ :tmp7 | 
+		tmp3 := (self tabVoisin at: tmp7) at: 2.
+		tmp5 := (self tabVoisin at: tmp7) at: 3.
+		tmp3 = 'pouvoir'
+			ifTrue: [ tmp4 add: tmp5 ] ].
+	^ tmp4 last
+*****************************
+nom
+	^ nom
+******************************
+nom: arg1
+	nom := arg1
+*********************************
+nombreDeRelationAvecSesVoisinControle
+	| tmp1 tmp2 tmp3 tmp4 |
+	tmp3 := 0.
+	tmp2 := self tabVoisin size.
+	tmp4 := tmp2.
+	1 to: tmp4 do: [ :tmp5 | 
+		tmp1 := (self tabVoisin at: tmp5) at: 2.
+		tmp1 = 'controle'
+			ifTrue: [ tmp3 := tmp3 + 1 ] ].
+	^ tmp3
+*************************************
+nombreDeRelationAvecSesVoisinCoordination
+	| tmp1 tmp2 tmp3 tmp4 |
+	tmp3 := 0.
+	tmp2 := self tabVoisin size.
+	tmp4 := tmp2.
+	1 to: tmp4 do: [ :tmp5 | 
+		tmp1 := (self tabVoisin at: tmp5) at: 2.
+		tmp1 = 'coordination'
+			ifTrue: [ tmp3 := tmp3 + 1 ] ].
+	^ tmp3
+**********************
+nombreDeRelationAvecSesVoisinPouvoir
+	| tmp1 tmp2 tmp3 tmp4 |
+	tmp3 := 0.
+	tmp2 := self tabVoisin size.
+	tmp4 := tmp2.
+	1 to: tmp4 do: [ :tmp5 | 
+		tmp1 := (self tabVoisin at: tmp5) at: 2.
+		tmp1 = 'pouvoir'
+			ifTrue: [ tmp3 := tmp3 + 1 ] ].
+	^ tmp3
+*********************************
+sommeDegreControle
+	| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+	tmp1 := 0.
+	tmp5 := SortedCollection new.
+	tmp2 := self tabVoisin size.
+	tmp6 := tmp2.
+	1 to: tmp6 do: [ :tmp7 | 
+		tmp3 := (self tabVoisin at: tmp7) at: 2.
+		tmp4 := (self tabVoisin at: tmp7) at: 3.
+		tmp3 = 'controle'
+			ifTrue: [ tmp5 add: tmp4 ] ].
+	^ tmp5 sum
+***********************************
+sommeDegreCoordination
+	| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+	tmp1 := 0.
+	tmp5 := SortedCollection new.
+	tmp2 := self tabVoisin size.
+	tmp6 := tmp2.
+	1 to: tmp6 do: [ :tmp7 | 
+		tmp3 := (self tabVoisin at: tmp7) at: 2.
+		tmp4 := (self tabVoisin at: tmp7) at: 3.
+		tmp3 = 'coordination'
+			ifTrue: [ tmp5 add: tmp4 ] ].
+	^ tmp5 sum
+********************************
+sommeDegrePouvoir
+	| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+	tmp1 := 0.
+	tmp5 := SortedCollection new.
+	tmp2 := self tabVoisin size.
+	tmp6 := tmp2.
+	1 to: tmp6 do: [ :tmp7 | 
+		tmp3 := (self tabVoisin at: tmp7) at: 2.
+		tmp4 := (self tabVoisin at: tmp7) at: 3.
+		tmp3 = 'pouvoir'
+			ifTrue: [ tmp5 add: tmp4 ] ].
+	^ tmp5 sum
+*********************************
+tabVoisin
+	^ tabVoisin
+*********************************
+tabVoisin: arg1
+	tabVoisin add: arg1
+
+********************************************************************
+********************************************************************
+*****************************Nouvelle Classe a creer****************
+********************************************************************
+Agent subclass: #GrapheAgents
+	instanceVariableNames: 'tabAgents tabRolePouvoir tabRoleCoordination tabRoleControle tabDegreCoordination tabDegreControle tabDegrePouvoir'
+	classVariableNames: ''
+	package: 'AzemenaGrossiMetricForDynamiqueSituation'
+
+********************************************************
+********************methode pour cette nouvelle classe*******
+*************************************************
+GrapheCompletNessControle
+	|agents tmp3 tmp4 tmp5 tmp1|
+	
+	agents := self tabAgents.
+	
+	agents do: [:agent_i | 
+		(agent_i tabVoisin) do: [:voisin_i|
+					tmp3 := (voisin_i at: 2).
+					tmp4 := (voisin_i at: 3).
+			tmp3 = 'controle'
+			ifTrue: [ self tabDegreControle add: tmp4 .
+						 self tabRoleControle add: tmp3 ] ]
+			].
+
+	tmp5 := (tabRoleControle size) * ((tabRoleControle size) - 1) * (tabDegreControle last).
+	tmp1 := (tabDegreControle sum ) / tmp5.
+	^ tmp1
+***************************************
+GrapheCompletNessCoordination
+	|agents tmp3 tmp4 tmp5 tmp1|
+	
+	agents := self tabAgents.
+	
+	agents do: [:agent_i | 
+		(agent_i tabVoisin) do: [:voisin_i|
+					tmp3 := (voisin_i at: 2).
+					tmp4 := (voisin_i at: 3).
+			tmp3 = 'coordination'
+			ifTrue: [ self tabDegreCoordination add: tmp4 .
+						 self tabRoleCoordination add: tmp3 ] ]
+			].
+
+	tmp5 := (tabRoleCoordination size) * ((tabRoleCoordination size) - 1) * (tabDegreCoordination last).
+	tmp1 := (tabDegreCoordination sum ) / tmp5.
+	^ tmp1
+********************************************
+GrapheCompletNessPouvoir
+	|agents tmp3 tmp4 tmp5 tmp1|
+	
+	agents := self tabAgents.
+	
+	agents do: [:agent_i | 
+		(agent_i tabVoisin) do: [:voisin_i|
+					tmp3 := (voisin_i at: 2).
+					tmp4 := (voisin_i at: 3).
+			tmp3 = 'pouvoir'
+			ifTrue: [ self tabDegrePouvoir add: tmp4 .
+						 self tabRolePouvoir add: tmp3 ] ]
+			].
+
+	tmp5 := (tabRolePouvoir size) * ((tabRolePouvoir size) - 1) * (tabDegrePouvoir last).
+	tmp1 := (tabDegrePouvoir sum ) / tmp5.
+	^ tmp1
+**********************************************
+initialize 
+	super initialize.
+	
+	 tabAgents := OrderedCollection new.
+	 tabRolePouvoir := SortedCollection new.
+	 tabRoleCoordination := SortedCollection new.
+	 tabRoleControle := SortedCollection new.
+	 tabDegreCoordination := SortedCollection new.
+	 tabDegreControle := SortedCollection new.
+	 tabDegrePouvoir := SortedCollection new
+*************************************************
+tabAgents
+	^tabAgents.
+**********************************
+tabAgents: agent
+	tabAgents add: agent.
+*******************************
+tabDegreControle
+	^tabDegreControle .
+********************************
+tabDegreControle: coor
+	tabDegreControle :=coor.
+*************************
+tabDegreCoordination
+	^tabDegreCoordination.
+**********************
+tabDegreCoordination: coor
+	tabDegreCoordination :=coor.
+*************************
+tabDegrePouvoir
+	^tabDegrePouvoir.
+************************
+tabDegrePouvoir: coor
+	tabDegrePouvoir :=coor.
+*************************
+tabRoleControle
+	^tabRoleControle.
+**********************
+tabRoleControle: coor
+	tabRoleControle :=coor.
+*********************
+tabRoleCoordination
+	tabRoleCoordination.
+**********************
+tabRoleCoordination: coor
+	tabRoleCoordination  :=coor.
+******************
+tabRolePouvoir
+	^tabRolePouvoir.
+****************
+tabRolePouvoir: role
+	tabRolePouvoir :=role.
+*******************************
+
+****************************************************************
+***************************dans lle playground voici le code**
+******************************************************************
+|a1 a2 a3 a4 a5 osGraphe|
+
+" creation des agents"
+a1 := Agent new.
+a2 := Agent new.
+a3 := Agent new.
+a4 := Agent new.
+a5 := Agent new.
+
+"creation du graphe qui contiendras tous les agents"
+osGraphe := GrapheAgents new .
+
+
+"definition des noms des differents agents"
+		a1 nom: 'PremierNoeud'.
+		a2 nom: 'DeuxiemeNoeud'.
+		a3 nom: 'TroisiemeNoeud'.
+		a4 nom: 'QuatriemeNoeud'.
+		a5 nom: 'CinquiemeNoeud'.
+
+
+"ajout des roles et des degres entres les agents et leurs voisins"
+a1 ajoutLienVoisin: a2 relation: 'pouvoir' degree:7.
+a1 ajoutLienVoisin: a3 relation: 'controle' degree:8.
+a1 ajoutLienVoisin: a4 relation: 'coordination' degree:10.
+a1 ajoutLienVoisin: a5 relation: 'pouvoir' degree:5.
+
+
+"ajout des agents dans le graphe"
+osGraphe tabAgents: a1.
+osGraphe tabAgents: a2.
+osGraphe tabAgents: a3.
+osGraphe tabAgents: a4.
+osGraphe tabAgents: a5.
+
+
+
+"affichage des différents graphe tu peu decommenter les autres et commenter celui ci et tu veras ce que sa donne
+tu as aussi la possibilité de creer ton graphe avec n'importe qu'elle forme maintenant grand n'importe comment en définissant les relations mais une fois avoir fini faut pas oublier d'ajouter les agents au graphe"
+
+
+
+^osGraphe GrapheCompletNessPouvoir 
+"^osGrapheCompletNessControle"
+"^osGrapheCompletNessCoordination"
+
+
+
+
+
+
+
+
+

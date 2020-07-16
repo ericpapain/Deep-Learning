@@ -1,0 +1,20 @@
+grapheBias
+	|g d|
+
+
+g := RTGrapher new.
+
+		d := RTData new.
+		d label: 'Bias'.
+		d connectColor: Color red .
+		d noDot .
+		d points: weighTestPointsWBias1.
+		d x: #first.
+		d y: #second.
+g add: d.
+g axisY title: 'Bias'.
+g axisX noDecimal; title: 'Epoch'.
+g legend addText: 'Bias vs Epoch'.
+
+^g
+

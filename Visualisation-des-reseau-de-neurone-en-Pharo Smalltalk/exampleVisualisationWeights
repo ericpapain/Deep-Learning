@@ -1,0 +1,22 @@
+exampleVisualisationWeights
+	|n|
+			n := NNetwork new.
+			
+			"entrainement sur 2 entrees et 3 couche de 3 neurone chacun les couche son modifiable pas les input et output"
+			
+  		   n configure: 2 hidden: 3 hidden: 3 nbOfOutputs: 1.
+			
+			
+  			0 to: 20000 do: [ :nbEpoch |
+        			n train: #(0 0) desiredOutputs: #(0).   
+        			n train: #(0 1) desiredOutputs: #(1).
+        			n train: #(1 0) desiredOutputs: #(1).
+        			n train: #(1 1) desiredOutputs: #(0).
+			 		
+			n trainPos: nbEpoch.
+			n constructionGrapheDePoint .
+			].
+
+"affichage du graphe"
+
+n grapheWeights .

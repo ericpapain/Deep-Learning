@@ -1,0 +1,4 @@
+Object subclass: #NNetwork
+	instanceVariableNames: 'layers errors precisions weighTestPointsWBias1 weighTestPoints1W1 weighTestPoints1W2 trainPos outputTrainData1 outputTrainData2 outputTrainData3 outputTrainData4 waitingOuput1 waitingOuput2 waitingOuput3 waitingOuput4 testPoints1 testPoints2 testPoints3 testPoints4'
+	classVariableNames: ''
+	package: 'NeuralNetwork-Core'

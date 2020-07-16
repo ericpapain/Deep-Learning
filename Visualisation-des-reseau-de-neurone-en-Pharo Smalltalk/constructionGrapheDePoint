@@ -1,0 +1,31 @@
+constructionGrapheDePoint
+	|neuronList premierNeurone pos tabBias tabW1 tabW2 val1 val2 val3 val4 |
+		
+		tabBias := OrderedCollection new.
+		tabW1 := OrderedCollection new.
+		tabW2 := OrderedCollection new.
+		       
+
+
+         neuronList := self firstNeuronLayer.
+		
+			premierNeurone :=(neuronList first).
+		
+			val1 :=outputTrainData1 add: (self feed: #(0 0) ).
+			val2 :=outputTrainData2 add: (self feed: #(0 1) ).
+			val3 :=outputTrainData3 add: (self feed: #(1 0) ).
+			val4 :=outputTrainData4 add: (self feed: #(1 1) ).
+			
+			pos:= self trainPos .
+			
+		testPoints1 add: { pos . (val1 first) }.
+		testPoints2 add: { pos . (val2 first) }	.
+		testPoints3 add: { pos . (val3 first) }.
+		testPoints4 add: { pos . (val4 first) }	.	
+				
+		waitingOuput1 add: { pos . (0) }.
+		waitingOuput2 add: { pos . (1) }	.
+			
+			weighTestPointsWBias1 add: {pos . ((premierNeurone bias )) }.
+			weighTestPoints1W1 add: {pos . ((premierNeurone weights)first)}.
+		   weighTestPoints1W2 add: { pos . ((premierNeurone weights)second)}.	

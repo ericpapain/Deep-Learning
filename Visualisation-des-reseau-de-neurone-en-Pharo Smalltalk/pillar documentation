@@ -1,0 +1,77 @@
+dans cette partie je vous apprendre comment visualiser les paramètres des réseaux de neurones pendant leurs formations
+
+!!!@Partie 1 Visualisation du Bias
+ 
+#""Visualisation Bias"",
+""Visualisation Poids"" == # ==
+#""Visualisation entrainement""
+
+pour commencer avec la visualisation du bias il faut tous d'abord creer votre reseau en exécutant le code si dessous :
+
+
+[[[label = foobar | caption = creation d'un réseau de neurone | language = smalltalk
+|Rn|
+Rn := NNetwork new.
+]]]
+
+ensuite vous pouvez définir la configuration de votre réseaux. dans notre cas nous allons 
+creer dans le code si dessous une configuretion pour un reseaux qui
+reçoit deux entrer et deux couche neuronal de 3 sur chacune des couches de neurone et la couche de sortie a un seul output : allez sans tarder exécuter le code si dessous pour configurer votre reseaux vous pouvez le modifier pour avoir un résultat différent si vous voulez.
+
+[[[label = foobar | caption = configuration réseaux de neurone | language = smalltalk
+|n|
+	n := NNetwork new.
+  	n configure: 2 hidden: 3 hidden: 3 nbOfOutputs: 1.
+]]]
+
+
+A present nous allons introduire notre jeux de donnée pour la porte logique Xor donc il est question nous allons realiser 2000 entrainement par defaut mais vous pouvez modifier cette valeur et le resultat ed l'entrainement seras different.
+il faut noter que la fonction d'entrainement train a deja ete implementer dans le livre d'alexandre bergel je vous invite a y faire un tour * https://github.com/AgileArtificialIntelligence/PharoSourceCode* : allez exécuter se qui suit pour lancer l'entrainement de votre modèle.
+
+
+[[[label = foobar | caption = entrainement du réseaux de neurone | language = smalltalk
+|n|
+	n := NNetwork new.
+  	n configure: 2 hidden: 3 hidden: 3 nbOfOutputs: 1.
+			
+  			0 to: 2000 do: [ :nbEpoch |
+        			n train: #(0 0) desiredOutputs: #(0).   
+        			n train: #(0 1) desiredOutputs: #(1).
+        			n train: #(1 0) desiredOutputs: #(1).
+        			n train: #(1 1) desiredOutputs: #(0).
+			 				
+			n positionNeuron:3.		
+			n trainPos: nbEpoch.
+			n constructionGrapheDePoint .
+			].
+]]]
+
+
+voila votre entrainement est terminer pour voir la variable du Bias pendant l'entrainement exécuter le dernier code ci-dessous s'il ne s'affiche pas nous vous invitons a ouvrir le playground et copier le code et coller dans le playground vous aurez le résultat je vous finirais le résultat final a la fin de ce tutos :
+
+[[[label = foobar | caption = affichage graphe de Bias | language = smalltalk
+|n|
+			n := NNetwork new.
+			
+			"entrainement sur 2 entrees et 3 couche de 3 neurone chacun les couche son modifiable pas les input et output"
+			
+  		   n configure: 2 hidden: 3 hidden: 3 nbOfOutputs: 1.
+			
+			
+  			0 to: 2000 do: [ :nbEpoch |
+        			n train: #(0 0) desiredOutputs: #(0).   
+        			n train: #(0 1) desiredOutputs: #(1).
+        			n train: #(1 0) desiredOutputs: #(1).
+        			n train: #(1 1) desiredOutputs: #(0).
+			 		
+					
+			n positionNeuron:3.		
+			n trainPos: nbEpoch.
+			n constructionGrapheDePoint .
+			].
+
+"affichage du graphe"
+
+n grapheWeights .
+]]]
+

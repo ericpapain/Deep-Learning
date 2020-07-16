@@ -1,0 +1,3 @@
+firstNeuronLayer
+	"permet de renvoyer le premier neurone de la couche sur laquelle on se trouve"
+    ^ layers first neurons 

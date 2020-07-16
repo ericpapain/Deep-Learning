@@ -1,0 +1,69 @@
+grapheEntrainement
+	|g d|
+
+
+g := RTGrapher new.
+
+
+		d := RTData new.
+		d label: 'DataSet 1'.
+		d connectColor: Color blue.
+		d noDot.
+		d points: testPoints1.
+		d x: #first.
+		d y: #second.
+g add: d.
+
+		d := RTData new.
+		d label: 'Dataset 2'.
+		d connectColor: Color green .
+		d noDot .
+		d points: testPoints2.
+		d x: #first.
+		d y: #second.
+g add: d.
+
+		d := RTData new.
+		d label: 'Dataset 3'.
+		d connectColor: Color magenta  .
+		d noDot .
+		d points: testPoints3.
+		d x: #first.
+		d y: #second.
+g add: d.
+
+d := RTData new.
+d label: 'Dataset 4'.
+		d connectColor: Color orange .
+		d noDot .
+		d points: testPoints4.
+		d x: #first.
+		d y: #second.
+g add: d.
+
+d := RTData new.
+d label: 'waittingOutput 1'.
+		d connectColor: Color red  .
+		d noDot .
+		d points: waitingOuput1.
+		d x: #first.
+		d y: #second.
+g add: d.
+
+
+d := RTData new.
+d label: 'WaittingOutput 2'.
+		d connectColor: Color red .
+		d noDot .
+		d points: waitingOuput2.
+		d x: #first.
+		d y: #second.
+g add: d.
+
+g axisY title: 'OutputTrain/Epoch'.
+g axisX noDecimal; title: 'Epoch'.
+g legend addText: 'OutputTrain vs Epoch'.
+
+
+^g
+
