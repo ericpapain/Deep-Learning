@@ -1,7 +1,6 @@
 # Description de chaque projet
 
 ## moteur de recherche d'image dans la base de donnée de Wang
-
     > Enoncé 
 La recherche d’images par le contenu est un domaine de recherche très actif depuis plusieurs
 années maintenant. Avec l’explosion de l’imagerie numérique, nous nous retrouvons souvent
