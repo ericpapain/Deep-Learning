@@ -1,4 +1,13 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov  6 00:04:03 2019
+
+@author: eric
+"""
+
 # RESEAU DE NEURONE RECURRENT
+
 """
 nous allons essayer de prédire le cout de l'action google pour voir 
 l'evolution de l'action et prédire l'allure de l'action 
@@ -18,7 +27,7 @@ import matplotlib.pyplot as plt
 
 
 # chargement jeux d'entrainement
-dataset_train = pd.read_csv("/home/eric/Documents/analyseDonnee/udemyInoussaMerci/deeplearnig/deeplearning-master/Part 3 - Recurrent_Neural_Networks/EricRnn/dataset/Google_Stock_Price_Train.csv")
+dataset_train = pd.read_csv("/home/eric/Documents/analyseDonnee/deeplearnig/deeplearning-master/Recurrent_Neural_Networks/EricRnn/dataset/Google_Stock_Price_Train.csv")
 
 training_set = dataset_train[["Open"]].values
 
